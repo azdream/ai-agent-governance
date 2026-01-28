@@ -1,5 +1,11 @@
 # AI AGENT GOVERNANCE & ARCHITECTURE MODEL v2.0
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ai-agent-governance/deploy-status)](https://ai-agent-governance.netlify.app)
+
+🌐 **Live Site:** [ai-agent-governance.netlify.app](https://ai-agent-governance.netlify.app)
+
+---
+
 이 문서는 자율 에이전트의 운영 아키텍처, 워크플로우 프로토콜, 리소스 계약을 정의합니다.
 
 ---
