@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent Governance - APEI Framework</title>
+    <meta name="description" content="AI Agent Governance & Architecture Model - APEI Protocol for multi-agent development workflows">
+    
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-purple: #a371f7;
+            --accent-green: #3fb950;
+            --accent-orange: #d29922;
+            --accent-red: #f85149;
+            --border-color: #30363d;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(88, 166, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(163, 113, 247, 0.15) 0%, transparent 50%),
+                var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(88, 166, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(88, 166, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+        
+        .hero-badge {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-blue) 50%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--accent-blue);
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+        
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        nav .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+        
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        section .subtitle {
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+        
+        /* APEI Cards */
+        .apei-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .apei-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .apei-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+        
+        .apei-card.analyze::before { background: var(--accent-blue); }
+        .apei-card.plan::before { background: var(--accent-purple); }
+        .apei-card.execute::before { background: var(--accent-green); }
+        .apei-card.iterate::before { background: var(--accent-orange); }
+        
+        .apei-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .apei-card .phase-number {
+            font-size: 3rem;
+            font-weight: 800;
+            opacity: 0.1;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+        }
+        
+        .apei-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .apei-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .apei-card ul {
+            margin-top: 1rem;
+            padding-left: 1.25rem;
+            color: var(--text-secondary);
+        }
+        
+        .apei-card li {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Modes Section */
+        .modes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        @media (max-width: 900px) {
+            .modes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .mode-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .mode-card .icon {
+            width: 64px;
+            height: 64px;
+            background: var(--bg-tertiary);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .mode-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .mode-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Architecture Diagram */
+        .architecture {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .architecture h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .architecture-diagram {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            overflow-x: auto;
+            color: var(--text-secondary);
+            white-space: pre;
+            text-align: center;
+        }
+        
+        /* Code Block */
+        .code-block {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        .code-block code {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">🤖 AI Agent Governance</a>
+            <ul class="nav-links">
+                <li><a href="#apei">APEI Protocol</a></li>
+                <li><a href="#modes">Modes</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="https://github.com/azdream/ai-agent-governance">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            v2.0 — 트램 Central Model
+        </div>
+        <h1>AI Agent Governance</h1>
+        <p>자율 에이전트의 운영 아키텍처, 워크플로우 프로토콜, 리소스 계약을 정의하는 프레임워크</p>
+        <div class="hero-buttons">
+            <a href="#apei" class="btn btn-primary">
+                📖 시작하기
+            </a>
+            <a href="https://github.com/azdream/ai-agent-governance" class="btn btn-secondary">
+                ⭐ GitHub
+            </a>
+        </div>
+    </section>
+
+    <section id="apei">
+        <h2>APEI Protocol</h2>
+        <p class="subtitle">모든 에이전트가 준수해야 하는 4단계 워크플로우 프레임워크</p>
+        
+        <div class="apei-grid">
+            <div class="apei-card analyze">
+                <span class="phase-number">1</span>
+                <h3>🔍 Analyze</h3>
+                <p>컨텍스트 로딩 및 요구사항 분석</p>
+                <ul>
+                    <li>관련 파일/문서 식별</li>
+                    <li>모호한 점 질문</li>
+                    <li>제약 조건 파악</li>
+                </ul>
+            </div>
+            
+            <div class="apei-card plan">
+                <span class="phase-number">2</span>
+                <h3>📋 Plan</h3>
+                <p>작업 분해 및 실행 계획 수립</p>
+                <ul>
+                    <li>3-10개 하위 태스크 분해</li>
+                    <li>영향 범위 분석</li>
+                    <li>사용자/오케스트레이터 승인</li>
+                </ul>
+            </div>
+            
+            <div class="apei-card execute">
+                <span class="phase-number">3</span>
+                <h3>⚡ Execute</h3>
+                <p>원자적 실행 및 상태 로깅</p>
+                <ul>
+                    <li>한 번에 하나의 변경</li>
+                    <li>MCP 표준 준수</li>
+                    <li>매 단계 진행 상황 업데이트</li>
+                </ul>
+            </div>
+            
+            <div class="apei-card iterate">
+                <span class="phase-number">4</span>
+                <h3>🔄 Iterate</h3>
+                <p>검증 및 자기 수정</p>
+                <ul>
+                    <li>테스트/린트 실행</li>
+                    <li>오류 시 최대 3회 재시도</li>
+                    <li>5턴 초과 시 에스컬레이션</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="modes">
+        <h2>Deployment Modes</h2>
+        <p class="subtitle">프로젝트 복잡도와 요구사항에 따른 세 가지 배포 모드</p>
+        
+        <div class="modes-grid">
+            <div class="mode-card">
+                <div class="icon">🤖</div>
+                <h3>Single Agent</h3>
+                <p>단일 LLM이 모든 역할 수행. 소규모 작업과 빠른 프로토타이핑에 적합.</p>
+            </div>
+            
+            <div class="mode-card">
+                <div class="icon">👥</div>
+                <h3>CrewAI</h3>
+                <p>역할 기반 협업 에이전트. 팀 시뮬레이션과 전문 분야 분리에 적합.</p>
+            </div>
+            
+            <div class="mode-card">
+                <div class="icon">🔗</div>
+                <h3>LangGraph</h3>
+                <p>상태 기반 그래프 오케스트레이션. 복잡한 워크플로우와 세밀한 제어.</p>
+            </div>
+        </div>
+        
+        <div class="architecture">
+            <h3>🚃 트램 Central Model (Hybrid)</h3>
+            <div class="architecture-diagram">
+┌─────────────────────────────────────────────────────────────────────┐
+│                         Chris (Human)                                │
+│                        목표 제시 & 최종 승인                          │
+└───────────────────────────────┬─────────────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                        트램 🚃 (Central Hub)                         │
+│              Orchestrator / Researcher / Planner / Judge            │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│    ANALYZE + PLAN ──→ DELEGATE ──→ JUDGE                            │
+│         │                 │           │                              │
+│         ▼                 ▼           ▼                              │
+│    리서치/계획      Claude Code    결과 검토                         │
+│                      Gemini        APPROVE/REJECT                    │
+│                     (Workers)                                        │
+│                                                                      │
+└─────────────────────────────────────────────────────────────────────┘
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture">
+        <h2>Resource Governance</h2>
+        <p class="subtitle">에이전트의 무한 루프 방지와 효율성을 위한 자원 관리</p>
+        
+        <div class="code-block">
+            <code>
+┌────────────────────────┬───────┬─────────────────────┐
+│ Constraint             │ Limit │ On Exceed           │
+├────────────────────────┼───────┼─────────────────────┤
+│ Iterations per task    │ 5     │ Escalate            │
+│ Retry on error         │ 3     │ Escalate            │
+│ Files per change       │ 5     │ Split task          │
+│ Execution time         │ 10min │ Checkpoint & pause  │
+└────────────────────────┴───────┴─────────────────────┘
+            </code>
+        </div>
+    </section>
+
+    <footer>
+        <p>
+            Built with 🚃 by <a href="https://github.com/azdream">azdream</a> & 트램
+            <br><br>
+            <a href="https://github.com/azdream/ai-agent-governance">GitHub</a> · 
+            <a href="docs/hooks.md">Hook System</a> · 
+            MIT License
+        </p>
+    </footer>
+</body>
+</html>
