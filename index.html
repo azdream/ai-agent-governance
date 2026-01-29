@@ -416,6 +416,7 @@
     </nav>
 
     <section class="hero">
+        <img src="assets/images/tram-mascot-dark.jpg" alt="트램 마스코트" style="width: 120px; height: 120px; border-radius: 50%; margin-bottom: 1.5rem; box-shadow: 0 0 40px rgba(88, 166, 255, 0.3);">
         <div class="hero-badge">
             <span class="dot"></span>
             v2.0 — 트램 Central Model
@@ -438,7 +439,7 @@
         
         <div class="apei-grid">
             <div class="apei-card analyze">
-                <span class="phase-number">1</span>
+                <img src="assets/images/icon-analyze.jpg" alt="Analyze" style="width: 64px; height: 64px; border-radius: 0.5rem; margin-bottom: 1rem;">
                 <h3>🔍 Analyze</h3>
                 <p>컨텍스트 로딩 및 요구사항 분석</p>
                 <ul>
@@ -449,7 +450,7 @@
             </div>
             
             <div class="apei-card plan">
-                <span class="phase-number">2</span>
+                <img src="assets/images/icon-plan.jpg" alt="Plan" style="width: 64px; height: 64px; border-radius: 0.5rem; margin-bottom: 1rem;">
                 <h3>📋 Plan</h3>
                 <p>작업 분해 및 실행 계획 수립</p>
                 <ul>
@@ -460,7 +461,7 @@
             </div>
             
             <div class="apei-card execute">
-                <span class="phase-number">3</span>
+                <img src="assets/images/icon-execute.jpg" alt="Execute" style="width: 64px; height: 64px; border-radius: 0.5rem; margin-bottom: 1rem;">
                 <h3>⚡ Execute</h3>
                 <p>원자적 실행 및 상태 로깅</p>
                 <ul>
@@ -471,7 +472,7 @@
             </div>
             
             <div class="apei-card iterate">
-                <span class="phase-number">4</span>
+                <img src="assets/images/icon-iterate.jpg" alt="Iterate" style="width: 64px; height: 64px; border-radius: 0.5rem; margin-bottom: 1rem;">
                 <h3>🔄 Iterate</h3>
                 <p>검증 및 자기 수정</p>
                 <ul>
@@ -509,27 +510,7 @@
         
         <div class="architecture">
             <h3>🚃 트램 Central Model (Hybrid)</h3>
-            <div class="architecture-diagram">
-┌─────────────────────────────────────────────────────────────────────┐
-│                         Chris (Human)                                │
-│                        목표 제시 & 최종 승인                          │
-└───────────────────────────────┬─────────────────────────────────────┘
-                                │
-                                ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                        트램 🚃 (Central Hub)                         │
-│              Orchestrator / Researcher / Planner / Judge            │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                      │
-│    ANALYZE + PLAN ──→ DELEGATE ──→ JUDGE                            │
-│         │                 │           │                              │
-│         ▼                 ▼           ▼                              │
-│    리서치/계획      Claude Code    결과 검토                         │
-│                      Gemini        APPROVE/REJECT                    │
-│                     (Workers)                                        │
-│                                                                      │
-└─────────────────────────────────────────────────────────────────────┘
-            </div>
+            <img src="assets/images/tram-central-diagram.jpg" alt="트램 Central Model" style="width: 100%; max-width: 800px; display: block; margin: 0 auto; border-radius: 1rem;">
         </div>
     </section>
 

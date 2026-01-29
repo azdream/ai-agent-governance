@@ -280,24 +280,7 @@
     <section>
         <h2>⚡ Hook Lifecycle</h2>
         <div class="lifecycle">
-            <pre>
-┌─────────────────────────────────────────────────────────────────┐
-│                        Hook Lifecycle                            │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  UserPromptSubmit ──→ PreExecution ──→ Execution ──→ PostToolUse │
-│         │                   │              │              │      │
-│         ▼                   ▼              ▼              ▼      │
-│   ┌──────────┐       ┌──────────┐   ┌──────────┐   ┌──────────┐ │
-│   │ Init     │       │ Validate │   │ Monitor  │   │ Verify   │ │
-│   │ Pipeline │       │ Input    │   │ Progress │   │ Output   │ │
-│   └──────────┘       └──────────┘   └──────────┘   └──────────┘ │
-│                                                          │       │
-│                                                          ▼       │
-│                                              Stop ──→ Transition │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
-            </pre>
+            <img src="assets/images/hook-pipeline.jpg" alt="Hook System Pipeline" style="width: 100%; max-width: 1000px; display: block; margin: 0 auto; border-radius: 0.5rem;">
         </div>
     </section>
 
