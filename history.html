@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI의 역사 - AI Agent Governance</title>
+    <meta name="description" content="인공지능의 역사: 철학적 사유부터 생성형 AI까지의 타임라인">
+    
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-purple: #a371f7;
+            --accent-green: #3fb950;
+            --accent-orange: #d29922;
+            --accent-red: #f85149;
+            --accent-cyan: #39c5cf;
+            --accent-pink: #f778ba;
+            --border-color: #30363d;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(13, 17, 23, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+        
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        nav .nav-links a:hover,
+        nav .nav-links a.active {
+            color: var(--accent-blue);
+        }
+        
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(247, 120, 186, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(88, 166, 255, 0.1) 0%, transparent 50%),
+                var(--bg-primary);
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-blue) 50%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .era {
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .era-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .era-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            flex-shrink: 0;
+        }
+        
+        .era-1 .era-icon { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .era-2 .era-icon { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .era-3 .era-icon { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .era-4 .era-icon { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .era-5 .era-icon { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .era-6 .era-icon { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+        
+        .era-title h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .era-title span {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple));
+            opacity: 0.5;
+        }
+        
+        .event {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .event::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 3px solid var(--accent-blue);
+            z-index: 1;
+        }
+        
+        .event.milestone::before {
+            width: 18px;
+            height: 18px;
+            left: calc(-2rem - 2px);
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+            box-shadow: 0 0 10px rgba(63, 185, 80, 0.5);
+        }
+        
+        .event-year {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: 0.25rem;
+        }
+        
+        .event-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .event-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .event-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.25rem;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+        
+        .tag.idea { background: rgba(163, 113, 247, 0.2); color: var(--accent-purple); }
+        .tag.theory { background: rgba(88, 166, 255, 0.2); color: var(--accent-blue); }
+        .tag.product { background: rgba(63, 185, 80, 0.2); color: var(--accent-green); }
+        .tag.research { background: rgba(210, 153, 34, 0.2); color: var(--accent-orange); }
+        
+        .summary-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 4rem 2rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .summary-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+        
+        .summary-card {
+            background: var(--bg-tertiary);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+        }
+        
+        .summary-card h3 {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .summary-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            nav .nav-links { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .era-header { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">🤖 AI Agent Governance</a>
+            <ul class="nav-links">
+                <li><a href="index.html#apei">APEI Protocol</a></li>
+                <li><a href="hooks.html">Hook System</a></li>
+                <li><a href="history.html" class="active">AI 역사</a></li>
+                <li><a href="https://github.com/azdream/ai-agent-governance">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>📜 AI의 역사</h1>
+        <p>철학적 사유 → 기초 이론 → 심볼릭 → 연결주의 → 딥러닝 → 생성형 AI<br>인공지능 발전의 완전한 타임라인</p>
+    </section>
+
+    <div class="timeline-container">
+        
+        <!-- Era 1: 1900-1940s -->
+        <div class="era era-1">
+            <div class="era-header">
+                <div class="era-icon">🧠</div>
+                <div class="era-title">
+                    <h2>사상과 계산 가능성</h2>
+                    <span>19세기 말 – 1940년대</span>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="event">
+                    <div class="event-year">1910–1913</div>
+                    <div class="event-title">『프린키피아 마테마티카』</div>
+                    <div class="event-desc">러셀·화이트헤드의 저작. 수학을 형식 논리와 기계적 추론으로 환원 가능하다는 비전 제시.</div>
+                    <div class="event-tags"><span class="tag idea">사상</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">1921</div>
+                    <div class="event-title">『논리철학 논고』</div>
+                    <div class="event-desc">비트겐슈타인의 저작. 언어·논리 구조에 대한 분석이 이후 논리주의·형식주의 AI 사상에 영향.</div>
+                    <div class="event-tags"><span class="tag idea">사상</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">1931</div>
+                    <div class="event-title">괴델의 불완전성 정리</div>
+                    <div class="event-desc">알고리즘적 증명·AI의 근본 한계를 이론적으로 규정.</div>
+                    <div class="event-tags"><span class="tag theory">이론</span></div>
+                </div>
+                <div class="event milestone">
+                    <div class="event-year">1936–1937</div>
+                    <div class="event-title">튜링 머신</div>
+                    <div class="event-desc">튜링의 『계산 가능한 수에 대하여』. 튜링 머신 개념과 계산 이론 정립.</div>
+                    <div class="event-tags"><span class="tag theory">이론</span><span class="tag idea">사상</span></div>
+                </div>
+                <div class="event milestone">
+                    <div class="event-year">1943</div>
+                    <div class="event-title">최초의 인공 뉴런 모델</div>
+                    <div class="event-desc">맥컬럭·피츠가 논리 뉴런 모델 제안. 연결주의의 이론적 출발점.</div>
+                    <div class="event-tags"><span class="tag theory">이론</span><span class="tag research">연구</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">1948</div>
+                    <div class="event-title">"Intelligent Machinery" 보고서</div>
+                    <div class="event-desc">튜링의 보고서. 기계 학습·탐색 기반 문제 해결 등 AI 연구 선언문.</div>
+                    <div class="event-tags"><span class="tag idea">사상</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Era 2: 1950-1970s -->
+        <div class="era era-2">
+            <div class="era-header">
+                <div class="era-icon">🎯</div>
+                <div class="era-title">
+                    <h2>"인공지능" 탄생과 심볼릭 AI</h2>
+                    <span>1950 – 1970년대</span>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="event milestone">
+                    <div class="event-year">1950</div>
+                    <div class="event-title">튜링 테스트</div>
+                    <div class="event-desc">"Computing Machinery and Intelligence"에서 튜링 테스트 제안. "기계가 생각할 수 있는가?"에 대한 현대적 논의 시작.</div>
+                    <div class="event-tags"><span class="tag idea">사상</span><span class="tag theory">이론</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">1950</div>
+                    <div class="event-title">체스 플레이 분석</div>
+                    <div class="event-desc">샤논이 체스 플레이를 탐색 문제로 분석. 게임·탐색 기반 AI의 기초 제공.</div>
+                    <div class="event-tags"><span class="tag research">연구</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">1951–1952</div>
+                    <div class="event-title">최초의 게임 AI</div>
+                    <div class="event-desc">맨체스터 Ferranti Mark 1에서 체커·체스 프로그램 구현.</div>
+                    <div class="event-tags"><span class="tag product">제품</span></div>
+                </div>
+                <div class="event milestone">
+                    <div class="event-year">1956</div>
+                    <div class="event-title">다트머스 회의</div>
+                    <div class="event-desc">"Artificial Intelligence" 용어가 처음 사용. 심볼릭(규칙 기반) 접근이 주류로 자리잡음.</div>
+                    <div class="event-tags"><span class="tag idea">사상</span><span class="tag research">연구</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">1958</div>
+                    <div class="event-title">LISP 개발</div>
+                    <div class="event-desc">매카시가 LISP 개발. AI 연구의 대표 프로그래밍 언어로 활용.</div>
+                    <div class="event-tags"><span class="tag product">제품</span><span class="tag research">연구</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">1959</div>
+                    <div class="event-title">MIT AI Lab 설립</div>
+                    <div class="event-desc">추론·지식 표현·프레임 등 심볼릭 AI 이론 발전.</div>
+                    <div class="event-tags"><span class="tag research">연구</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">1966</div>
+                    <div class="event-title">ELIZA</div>
+                    <div class="event-desc">조셉 바이젠바움의 초창기 자연어 챗봇 프로토타입.</div>
+                    <div class="event-tags"><span class="tag product">제품</span><span class="tag research">연구</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">1960–1970년대</div>
+                    <div class="event-title">전문가 시스템</div>
+                    <div class="event-desc">규칙 기반 의사결정 시스템 연구 확대. MYCIN 등 초기 의료 진단 시스템 등장.</div>
+                    <div class="event-tags"><span class="tag research">연구</span><span class="tag product">제품</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Era 3: 1980-2000s -->
+        <div class="era era-3">
+            <div class="era-header">
+                <div class="era-icon">🔄</div>
+                <div class="era-title">
+                    <h2>연결주의 부활·머신러닝·상용화</h2>
+                    <span>1980 – 2000년대</span>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="event">
+                    <div class="event-year">1980년대</div>
+                    <div class="event-title">AI 겨울 & 뉴럴넷 재부흥</div>
+                    <div class="event-desc">"AI 겨울" 이후, 퍼셉트론 한계 비판과 함께 뉴럴넷 재부흥(역전파 등). 연결주의 vs 심볼릭 논쟁 본격화.</div>
+                    <div class="event-tags"><span class="tag theory">이론</span><span class="tag research">연구</span></div>
+                </div>
+                <div class="event milestone">
+                    <div class="event-year">1986</div>
+                    <div class="event-title">역전파 알고리즘</div>
+                    <div class="event-desc">룸멜하트 등이 역전파를 이용한 다층 퍼셉트론 학습 정리. 현대 딥러닝의 직접적 전신.</div>
+                    <div class="event-tags"><span class="tag theory">이론</span><span class="tag research">연구</span></div>
+                </div>
+                <div class="event milestone">
+                    <div class="event-year">1997</div>
+                    <div class="event-title">IBM 딥블루</div>
+                    <div class="event-desc">체스 세계 챔피언 카스파로프 격파. 상징적인 AI 성취.</div>
+                    <div class="event-tags"><span class="tag product">제품</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">2000년대 초중반</div>
+                    <div class="event-title">통계적 머신러닝 확산</div>
+                    <div class="event-desc">SVM, 랜덤 포레스트, 그래디언트 부스팅 등이 산업 전반에 도입.</div>
+                    <div class="event-tags"><span class="tag research">연구</span><span class="tag product">제품</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">2002</div>
+                    <div class="event-title">룸바(Roomba)</div>
+                    <div class="event-desc">로봇 청소기 상용화. 단순 센서·규칙 기반이지만 가정용 로봇의 대중화 시작.</div>
+                    <div class="event-tags"><span class="tag product">제품</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">2006</div>
+                    <div class="event-title">"딥 러닝" 용어 보급</div>
+                    <div class="event-desc">Hinton 등이 심층 신경망과 사전학습 등의 아이디어 정리.</div>
+                    <div class="event-tags"><span class="tag theory">이론</span><span class="tag research">연구</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Era 4: 2010s -->
+        <div class="era era-4">
+            <div class="era-header">
+                <div class="era-icon">🚀</div>
+                <div class="era-title">
+                    <h2>소비자 제품 속 AI & 딥러닝 혁명</h2>
+                    <span>2010년대</span>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="event">
+                    <div class="event-year">2011</div>
+                    <div class="event-title">IBM Watson - Jeopardy!</div>
+                    <div class="event-desc">퀴즈쇼에서 우승. 자연어 질의응답 시스템의 가능성 과시.</div>
+                    <div class="event-tags"><span class="tag product">제품</span></div>
+                </div>
+                <div class="event milestone">
+                    <div class="event-year">2011년 10월</div>
+                    <div class="event-title">애플 Siri</div>
+                    <div class="event-desc">아이폰 4S에 탑재되어 음성 비서 개념을 대중화.</div>
+                    <div class="event-tags"><span class="tag product">제품</span></div>
+                </div>
+                <div class="event milestone">
+                    <div class="event-year">2012</div>
+                    <div class="event-title">AlexNet - ImageNet</div>
+                    <div class="event-desc">딥러닝이 ImageNet 대회에서 압도적 성능. 컴퓨터 비전 패러다임 전환.</div>
+                    <div class="event-tags"><span class="tag research">연구</span><span class="tag theory">이론</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">2014년 11월</div>
+                    <div class="event-title">아마존 Echo (Alexa)</div>
+                    <div class="event-desc">음성 기반 스마트 스피커·홈 어시스턴트 시장 형성.</div>
+                    <div class="event-tags"><span class="tag product">제품</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">2014–2015</div>
+                    <div class="event-title">GAN, Seq2Seq, Attention</div>
+                    <div class="event-desc">딥러닝 구조 혁신. 생성 모델과 어텐션 메커니즘 등장.</div>
+                    <div class="event-tags"><span class="tag research">연구</span><span class="tag theory">이론</span></div>
+                </div>
+                <div class="event milestone">
+                    <div class="event-year">2016</div>
+                    <div class="event-title">알파고 vs 이세돌</div>
+                    <div class="event-desc">구글 딥마인드의 알파고가 바둑 세계 챔피언 이세돌 9단을 이김. 강화학습·딥러닝 결합의 상징.</div>
+                    <div class="event-tags"><span class="tag product">제품</span><span class="tag research">연구</span></div>
+                </div>
+                <div class="event milestone">
+                    <div class="event-year">2017</div>
+                    <div class="event-title">"Attention Is All You Need"</div>
+                    <div class="event-desc">트랜스포머 구조 제안. 이후 LLM의 표준 구조가 됨.</div>
+                    <div class="event-tags"><span class="tag theory">이론</span><span class="tag research">연구</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">2018–2020</div>
+                    <div class="event-title">BERT, GPT-2/3</div>
+                    <div class="event-desc">대형 언어모델 등장. 사전학습·파인튜닝 패러다임 확립.</div>
+                    <div class="event-tags"><span class="tag research">연구</span><span class="tag product">제품</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Era 5: 2020s -->
+        <div class="era era-5">
+            <div class="era-header">
+                <div class="era-icon">✨</div>
+                <div class="era-title">
+                    <h2>생성형 AI·LLM 시대</h2>
+                    <span>2022 – 현재</span>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="event milestone">
+                    <div class="event-year">2022년 11월</div>
+                    <div class="event-title">ChatGPT</div>
+                    <div class="event-desc">GPT-3.5 기반 대화형 LLM이 일반 소비자에게 폭발적 인기. AI 대중화의 전환점.</div>
+                    <div class="event-tags"><span class="tag product">제품</span></div>
+                </div>
+                <div class="event milestone">
+                    <div class="event-year">2023</div>
+                    <div class="event-title">GPT-4, Gemini, Claude</div>
+                    <div class="event-desc">주요 상용 LLM 서비스 출시·확대. Microsoft Copilot(Office·GitHub 통합) 등장.</div>
+                    <div class="event-tags"><span class="tag product">제품</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">2023–2024</div>
+                    <div class="event-title">이미지·비디오 생성 AI</div>
+                    <div class="event-desc">Stable Diffusion, Midjourney, Runway 등 상용화 및 API·플랫폼 통합 확산.</div>
+                    <div class="event-tags"><span class="tag product">제품</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">2024</div>
+                    <div class="event-title">멀티모달 LLM 경쟁</div>
+                    <div class="event-desc">GPT-5.x, Gemini 2.x–3.x, Claude 3.x–4.x, Grok 4.x 등 연속 출시.</div>
+                    <div class="event-tags"><span class="tag product">제품</span><span class="tag research">연구</span></div>
+                </div>
+                <div class="event">
+                    <div class="event-year">2025–2026</div>
+                    <div class="event-title">"모든 앱에 AI 내장"</div>
+                    <div class="event-desc">기업용 Copilot 계열과 다양한 SaaS가 워크플로에 LLM 내장. AI 어시스턴트 편재화.</div>
+                    <div class="event-tags"><span class="tag product">제품</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Summary Section -->
+    <div class="summary-section">
+        <h2>📊 시대별 요약</h2>
+        <div class="summary-grid">
+            <div class="summary-card">
+                <h3>🧠 1900–1940s</h3>
+                <p><strong>"논리·계산 가능성"</strong><br>형식 논리, 계산 가능성, 튜링 머신, 초기 뉴럴넷 이론</p>
+            </div>
+            <div class="summary-card">
+                <h3>🎯 1950s–1970s</h3>
+                <p><strong>"심볼릭 AI"</strong><br>다트머스 회의, 전문가 시스템, 규칙·지식 기반 추론</p>
+            </div>
+            <div class="summary-card">
+                <h3>🔄 1980s–2000s</h3>
+                <p><strong>"연결주의·ML 확산"</strong><br>퍼셉트론·역전파, 딥블루, 통계적 ML, 상용화 준비</p>
+            </div>
+            <div class="summary-card">
+                <h3>🚀 2010s</h3>
+                <p><strong>"딥러닝·대형 모델"</strong><br>ImageNet, 알파고, 트랜스포머, BERT·GPT 계열</p>
+            </div>
+            <div class="summary-card">
+                <h3>✨ 2020s</h3>
+                <p><strong>"생성형·LLM 제품"</strong><br>ChatGPT, Gemini, Claude, Copilot 등 플랫폼 통합</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            Built with 🚃 by <a href="https://github.com/azdream">azdream</a> & 트램
+            <br><br>
+            <a href="index.html">Home</a> · 
+            <a href="hooks.html">Hook System</a> · 
+            <a href="https://github.com/azdream/ai-agent-governance">GitHub</a>
+            <br><br>
+            Sources: Wikipedia, IBM, TechTarget, Britannica, IEEE
+        </p>
+    </footer>
+</body>
+</html>
