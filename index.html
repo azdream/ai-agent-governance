@@ -548,6 +548,24 @@ recipes[2]{id,title,calories}:<br>
                 <li>LLM의 정보 추출 및 요약 성능 향상</li>
             </ul>
         </div>
+
+        <div class="architecture" style="margin-top: 2rem;">
+            <h3>🧠 Context Engineering</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">파편화된 정보 검색(RAG)의 한계를 극복하기 위해, 개별 데이터 조각(Chunk)에 문서 전체의 상황 맥락을 결합하여 정확도를 극대화합니다.</p>
+            <div class="code-block" style="text-align: left;">
+                <code style="color: var(--accent-green);">
+// Contextual Retrieval Concept<br>
+[Original Chunk]: "매출이 3% 성장함"<br>
+[Context Added]: "이 정보는 2023년 Q2 ACME Corp의 재무 보고서 내용임. 매출이 3% 성장함"<br>
+→ 검색 실패율 67% 감소
+                </code>
+            </div>
+            <ul style="color: var(--text-secondary); padding-left: 1.25rem; margin-top: 1rem; text-align: left;">
+                <li>상황 맥락 기반 임베딩(Contextual Embeddings)</li>
+                <li>할루시네이션 방지 및 검색 정확도 향상</li>
+                <li>에이전트의 복합 프로젝트 이해도 증대</li>
+            </ul>
+        </div>
     </section>
 
     <footer>
