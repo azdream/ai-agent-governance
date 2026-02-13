@@ -516,7 +516,7 @@
 
     <section id="architecture">
         <h2>Resource Governance</h2>
-        <p class="subtitle">에이전트의 무한 루프 방지와 효율성을 위한 자원 관리</p>
+        <p class="subtitle">에이전트의 무한 루프 방지와 효율성을 위한 자원 관리 및 데이터 최적화</p>
         
         <div class="code-block">
             <code>
@@ -529,6 +529,24 @@
 │ Execution time         │ 10min │ Checkpoint & pause  │
 └────────────────────────┴───────┴─────────────────────┘
             </code>
+        </div>
+
+        <div class="architecture" style="margin-top: 2rem;">
+            <h3>📊 Data Efficiency: TOON Format</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">대량 데이터 입출력 시 TOON(Token-Oriented Object Notation) 포맷을 사용하여 토큰 비용을 절감하고 처리 속도를 극대화합니다.</p>
+            <div class="code-block" style="text-align: left;">
+                <code style="color: var(--accent-blue);">
+// TOON (Token-Oriented Object Notation) Example<br>
+recipes[2]{id,title,calories}:<br>
+1,Kimchi Stew,250<br>
+2,Bulgogi,450
+                </code>
+            </div>
+            <ul style="color: var(--text-secondary); padding-left: 1.25rem; margin-top: 1rem; text-align: left;">
+                <li>JSON 대비 최대 40% 토큰 절감</li>
+                <li>반복적인 객체 리스트 구조에 최적화</li>
+                <li>LLM의 정보 추출 및 요약 성능 향상</li>
+            </ul>
         </div>
     </section>
 
