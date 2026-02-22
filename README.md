@@ -861,6 +861,82 @@ result = app.invoke(None, config)  # Continues from last state
 
 ---
 
+## 5. Communication Protocols
+
+### 5.1 A2A (Agent-to-Agent) Message Format
+
+```json
+{
+  "from": "planner",
+  "to": "coder",
+  "type": "task_delegation",
+  "payload": {
+    "task_id": "TASK-001",
+    "description": "Implement login endpoint",
+    "constraints": {
+      "max_iterations": 5,
+      "required_tests": true
+    },
+    "context": ["auth-spec.md", "api-design.md"],
+    "expected_output": {
+      "files": ["src/auth/login.py", "tests/test_login.py"],
+      "validation": "pytest tests/test_login.py passes"
+    }
+  },
+  "metadata": {
+    "priority": "high",
+    "deadline": "2024-01-28T22:00:00Z"
+  }
+}
+```
+
+### 5.2 Status Report Format
+
+```json
+{
+  "agent": "coder",
+  "task_id": "TASK-001",
+  "status": "completed",  // in_progress, completed, blocked, failed
+  "iteration": 3,
+  "output": {
+    "artifacts": [
+      "src/auth/login.py",
+      "tests/test_login.py"
+    ],
+    "summary": "Implemented JWT-based login with refresh tokens"
+  },
+  "metrics": {
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "lint_errors": 0
+  },
+  "next_action": "ready_for_review"
+}
+```
+
+### 5.3 Escalation Format
+
+```json
+{
+  "type": "escalation",
+  "from": "coder",
+  "reason": "resource_limit_exceeded",
+  "details": {
+    "limit": "max_iterations",
+    "value": 5,
+    "current_state": {
+      "completed_steps": 3,
+      "pending_steps": 2,
+      "blockers": ["Unclear API response format"]
+    }
+  },
+  "recommendation": "Clarify API spec before continuing",
+  "checkpoint": "checkpoint-2024-01-28-001"
+}
+```
+
+---
+
 ## 7. Hybrid Mode: CrewAI + LangGraph
 
 CrewAI와 LangGraph의 장점을 결합한 하이브리드 아키텍처입니다.
